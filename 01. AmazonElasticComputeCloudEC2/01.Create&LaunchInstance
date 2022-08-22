@@ -1,0 +1,36 @@
+Set Up New Instance EC2
+    Instance
+     - Is a virtual server that runs on the AWS cloud
+     - Each instance type offers different compute and memory capabilities. 
+     - Select an instance type based on the amount of memory and computing power that you need for the application or 
+       software that you plan to run on the instance. 
+    
+    Steps:
+     - Sign into the AWS Management Console
+     - EC2 Service section
+     - Launch new Instance
+       - Give a name
+       - Choose Amazon Machine Image(AMI): This is a template that constains the software config:
+         - OS, app server and apps required to launch our instance!
+           e.g Ubuntu 22 free tier!
+       - Choose Instance Type: This determinates the hardware of the host computer used 
+                               Each instance type offers different compute, memory, and storage capabilities, 
+                               and is grouped in an instance family based on these capabilities
+                               e.g 
+                                - Computed optimized
+                                - Storage optimized
+                                - Accelerated computing
+                                - General Purpose
+                                - Memory Optimized
+                                =>> Select free tier!
+       - Key pair(login): We use a kew pair to securely connect to our instance. Ensure that we have access to the selected key pair 
+                          before you launch the instance.
+                          e.g my-aws-key
+       - Network settings:
+         - Firewall => create a security group
+                       - rules:
+                         - Allow SSH, Allow HTTPs, Allow HTTP!
+       - Final => LAUNCH !
+
+    
+                
