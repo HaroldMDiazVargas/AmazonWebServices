@@ -1,0 +1,9 @@
+Deploy front-end app from windows
+    Once we have build our app using:
+     - ng build
+    and we have created our dist/ folder which contains the production app, we need to deploy it!
+
+    Steps:
+     - Connect to server via SSH 
+     - create a new folder for front-end app e.g sudo mkdir opt/front-end
+     - 
