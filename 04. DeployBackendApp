@@ -19,4 +19,9 @@ Deploy backend app
        - cd /opt/back-end && sudo npm install
      - Start the node app(APIs) using the PM2 process manager:
        - sudo pm2 start server.js/index.js
-      
+    
+
+    The API is now running on Node.js under the PM2 process manager and listening on port 4000. Only port 80 (HTTP) is 
+    publicly accessible on the server so we can't hit the API yet!
+    
+    We will access to the API after we've configured NGINX as a reverse proxy to pass through HTTP traffic to the api!
