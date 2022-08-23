@@ -5,5 +5,18 @@ Deploy front-end app from windows
 
     Steps:
      - Connect to server via SSH 
-     - create a new folder for front-end app e.g sudo mkdir opt/front-end
-     - 
+     - create a new folder for front-end app in the EC2 instance:
+       ❯ sudo mkdir opt/front-end
+     - To transfer files from our local folder into the EC2 instance, we need to change owner:
+       ❯ sudo chown ubuntu:ubuntu /opt/front-end
+     - To transfer using the PuTTY Secure Copy Protocol(pscp), we need to install:(check pscp -v !)
+       ❯ sudo apt-install putty-tools
+     - Transfer the compiled app(/dist) to the server via ssh; run in the windows poweshell:
+       ❯ pscp -i <path-to-key-file> -r <path-to-local-dist-folder>\* ubuntu@<domain name>:/opt/front-end
+
+       - <path-to-key-file>  =                  C:\Users\USUARIO\Desktop\H\AWS\my-aws-key.ppk 
+       - <path-to-local-dist-folder>\*  =       C:\Users\USUARIO\Desktop\H\Apps\angular-demo\auth-demo\dist\auth-demo\*
+       - ubuntu@<domain name>:/opt/front-end  =  ubuntu@ec2-18-231-191-60.sa-east-1.compute.amazonaws.com:/opt/front-end
+
+       ❯ pscp -i  C:\Users\USUARIO\Desktop\H\AWS\my-aws-key.ppk -r C:\Users\USUARIO\Desktop\H\Apps\angular-demo\auth-demo\dist\auth-demo\*
+        ubuntu@ec2-18-231-191-60.sa-east-1.compute.amazonaws.com:/opt/front-end
