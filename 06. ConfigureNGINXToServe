@@ -12,6 +12,7 @@ Configure NGINX to serve the Node and Angular app
      - Requests beginning with the path /api/* will be proxied through to the Node.js api running on port 4000
      - Other requests will serve the Angular front-end app and associated files (js/css/images).
 
+
     Steps:
      - We delete the default NGINX site config file with the command:
        ❯ sudo rm /etc/nginx/sites-available/default
