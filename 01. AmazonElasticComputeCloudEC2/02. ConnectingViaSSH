@@ -1,0 +1,29 @@
+Connect to Ubuntu EC2 Instance via SSH
+    From window we need to use PuTTY:
+     - Install PuTTY => https://www.chiark.greenend.org.uk/~sgtatham/putty/
+    
+    Convert private key using PuTTYgen:
+     - Converts PEM keys to the required PPK format for PuTTY
+     - PuTTY does not natively support the PEM format for SSH keys
+     - Steps:
+       - Open PuTTYgen
+       - Type of key to generate: choose RSA
+       - Load pem key
+       - Save the new ppk key!
+    
+    Connection to EC2 Instance:
+     - Start PuTTY
+     - Session:
+       - instance-user-name@instance-public-dns-name
+         e.g ubuntu@ec2-18-229-139-121.sa-east-1.compute.amazonaws.com
+       - Port 22
+       - SSH connection
+     - Connection/SSH/Auth:
+       - Browser => place ppk key!
+    
+
+
+-- Terminal  EC2
+ubuntu@ip-172-31-44-178$
+
+   
