@@ -1,0 +1,27 @@
+Deploy backend app
+    We need to deploy our node.js + MongoDB integration => APIs!
+
+    Node App:
+     - When develop node apps, we don't build any kind of dist/ folder. Instead we just have our index/server file
+       and all the related modules and config per environment!
+     - So we have our Node app in a folder, can be directly a repo or part of a global repo!
+       
+    /opt/ directory in linux:
+     - This is reserved for the installation of add-on application software packages
+     - This means software that is not part of the system
+
+    Steps:
+     - Create a directory for backend app: 
+       - sudo mkdir /opt/back-end
+     - In case we have all the backend app in a repo, we can clone it:
+       - sudo git clone repoAddress /opt/back-end
+     - Navigate into the back-end directory and install all required npm packages:
+       - cd /opt/back-end && sudo npm install
+     - Start the node app(APIs) using the PM2 process manager:
+       - sudo pm2 start server.js/index.js
+    
+
+    The API is now running on Node.js under the PM2 process manager and listening on port 4000. Only port 80 (HTTP) is 
+    publicly accessible on the server so we can't hit the API yet!
+    
+    We will access to the API after we've configured NGINX as a reverse proxy to pass through HTTP traffic to the api!
