@@ -1,0 +1,102 @@
+Setup Web Server with Node.js + MongoDB + NGINX
+    The main idea is to set up a production Ubuntu web server with:
+     - Node
+     - NPM
+     - Mongo
+     - PM2
+     - NGINX
+     - UFW
+    
+    Nodejs and NPM:
+     - To add nodejs and NPM onto a Debian or Ubuntu system we use:
+       - https://github.com/nodesource/distributions/blob/master/deb/setup_18.x
+     - This bash script allows us to add:
+       - Nodejs 18 Personal Package Archive(ppa) from nodesource in our local package database:
+         - PPAs => Are software repositories designed for Ubuntu users and are easier to install than other third-party repositories. 
+                   PPAs are often used to distribute pre-release software so that it can be tested:
+                   PPAs are for non standard software/updates. They are generally used by people who want the latest and greates
+     - Run sh:
+       - We need to run   ❯ curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -  
+                            or
+                            wget -qO- https://deb.nodesource.com/setup_18.x | sudo -E bash -
+     - Once we have in our local package database, we use apt-get:
+        ❯ sudo apt-get install -y nodejs
+     - We can see this in our installed packages: ❯ apt list --installed
+       nodejs/unknown,now 18.7.0-deb-1nodesource1 amd64 [installed]
+
+
+
+    MongoDB: => https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/
+    MongoDB is only available on:
+     - Ubuntu Ubuntu 20.04 (Focal)
+     - Ubuntu 18.04 (Bionic)
+     - Ubuntu 16.04 (Xenial)
+    
+     - Import the public key used by the package management system.
+       ❯ wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -   => https://pgp.mongodb.com
+         We should see an OK as result!
+     - Create a list file for MongoDB:
+       ❯ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+     - Reload local package database:
+       ❯ sudo apt-get update
+     - Install MongoDB packages:
+       ❯ sudo apt-get install -y mongodb-org
+     - Start MongoDB:
+       ❯ sudo systemctl start mongod
+     - Set MongoDB to start automatically on system startup:
+       ❯ sudo systemctl enable mongod
+    
+
+    PM2:
+     - PM2 is a production process manager for Node.js apps
+     - PM2 enables us:
+       - to keep applications alive forever
+       - reloads them without downtime
+       - helps us to manage application logging
+       - monitoring, and clustering.
+     - We  use 'npm' to install this package: => https://www.npmjs.com/package/pm2
+       ❯ sudo npm install pm2 -g
+     - Set pm2 to start automatically on system startup:
+       ❯ sudo pm2 startup systemd
+    
+    NGINX:
+     - This is an open source software for:
+       - web server
+       - proxy server (for email (IMAP, POP3, and SMTP) )
+       - reverse proxy server: distribute incoming traffic to slower upstream servers
+       - caching: caching content to improve performance
+       - load balancing for HTTP, TCP, and UDP servers.
+       - media streaming
+       - ...
+     - By default NGINX is configured to start at system startup and reboot designed for maximum performance and stability
+     - NGINX consistently beats Apache and other servers in benchmarks measuring web server performance
+     - NGINX supports all the components of the modern Web:
+       - including WebSocket
+       - HTTP/2, gRPC
+       - Streaming of multiple video formats (HDS, HLS, RTMP, and others).
+     - NGINX Plus and NGINX are the best-in-class web server and application delivery solutions used by high‑traffic websites 
+       such as Dropbox, Netflix, and Zynga. 
+       More than 350 million websites worldwide rely on NGINX Plus and NGINX Open Source to deliver their content quickly, 
+       reliably, and securely.
+     - Dynamic sites, built using anything from Node.js to PHP, commonly deploy NGINX as a content cache and reverse proxy to 
+       reduce load on application servers and make the most effective use of the underlying hardware.
+     - Install:
+       ❯ sudo apt-get install -y nginx
+
+
+
+    UFW (Uncomplicated Firewall):
+     - Allows SSH and web traffic (HTTP & HTTPS) to the server, then enables the firewall.
+     - This is the default firewall configuration tool for Ubuntu 
+     - Developed to ease iptables firewall configuration, ufw provides a user friendly way to create an IPv4 or IPv6 
+       host-based firewal
+     - It uses a command-line interface consisting of a small number of simple commands, and uses iptables for configuration
+     - ufw by default is initially disabled.
+     - Allow ssh connections through firewall:
+       ❯ sudo ufw allow OpenSSH
+     - allow http & https through firewall:
+       ❯ sudo ufw allow 'Nginx Full'
+     - Enable firewall and on system startup
+       ❯ sudo ufw --force enable 
+    
+    
